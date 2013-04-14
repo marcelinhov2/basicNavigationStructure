@@ -10,6 +10,8 @@ class MainRouter extends Backbone.Router
 
     index: (id) ->
         IndexView = require 'views/index'
+
+        console.log @app.currentView
         
         if !@app.currentView or @app.currentView != @indexView
             @indexView = new IndexView()
@@ -23,5 +25,5 @@ class MainRouter extends Backbone.Router
 
         @app.changeDOM @productView
 
-main = new MainRouter({pushState: false})
+main = new MainRouter()
 module.exports = main
