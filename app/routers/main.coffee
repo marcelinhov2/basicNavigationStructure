@@ -10,11 +10,18 @@ class MainRouter extends Backbone.Router
 
     index: (id) ->
         IndexView = require 'views/index'
-        @app.updateDOM new IndexView()
+        
+        if !@app.currentView or @app.currentView != @indexView
+            @indexView = new IndexView()
+            @app.changeDOM @indexView
+        else
+            @app.updateDOM @indexView
 
     product: (id) ->
         ProductView = require 'views/product'
-        @app.updateDOM new ProductView()
+        @productView = new ProductView()
 
-main = new MainRouter({pushState: true})
+        @app.changeDOM @productView
+
+main = new MainRouter({pushState: false})
 module.exports = main
